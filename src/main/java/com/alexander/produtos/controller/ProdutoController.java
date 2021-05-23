@@ -45,12 +45,13 @@ public class ProdutoController {
     }
 
     @RequestMapping(value = "/produtos", method = RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public @ResponseBody ProdutoModel alterProduto(@RequestBody ProdutoModel produto){
         return produtoRepository.save(produto);
     }
 
     @RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.FOUND)
     public @ResponseBody
     Optional<ProdutoModel> findById(@PathVariable Long id){
         Optional<ProdutoModel> prod = produtoRepository.findById(id);
