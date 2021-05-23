@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -43,4 +44,16 @@ public class ProdutoController {
         return produtoRepository.save(produto);
     }
 
+    @RequestMapping(value = "/produto/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Optional<ProdutoModel> findById(@PathVariable Long id){
+        Optional<ProdutoModel> prod = produtoRepository.findById(id);
+        return prod;
+    }
+
+    @RequestMapping(value = "/produto/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        produtoRepository.deleteById(id);
+    }
 }
